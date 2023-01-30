@@ -17,7 +17,7 @@ const Home = ({ navigation }) => {
   };
 
 const adminAddChat = () => {
-  if(auth?.currentUser?.email==="admin@gmail.com")
+  if(auth?.currentUser?.email==="ad@g.ma")
   navigation.navigate("AddChat");
   else
   Alert.alert("Permission denied","Only Admin can create chats");
