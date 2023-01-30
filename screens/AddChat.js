@@ -6,12 +6,14 @@ import { db } from '../firebase';
 const AddChat = ({ navigation }) => {
   const [input, setInput] = useState("");
 
+  // try to delete it it may be just a khodra fo9 t3am
   useLayoutEffect(() => {
     navigation.setOptions({
       title: "Add a new chat",
       headerBackTitle: "Chats"
     })
   }, [navigation])
+  
 const createChat = async () => {
   await db.collection('chats').add({
     chatName: input,
@@ -25,6 +27,7 @@ const createChat = async () => {
     <View>
       <Input
       placeholder='Enter a chat name'
+      cursorColor={"#B09955"}
       value={input}
       onChangeText={(text) => setInput(text)}
       onSubmitEditing={createChat} 
@@ -32,7 +35,12 @@ const createChat = async () => {
         <Icon name='wechat' type='antdesign' size={24} color="black" />
       }
       />
-      <Button onPress={createChat} title='Create new Chat'/>
+      <Button 
+      containerStyle={styles.button}
+      type="outLine"
+      titleStyle={{ color: '#fff' }}
+      onPress={createChat} 
+      title='Create new Chat'/>
     </View>
   )
 }
@@ -44,5 +52,8 @@ const styles = StyleSheet.create({
     padding: 30,
     backgroundColor: "white",
     height: "100%",
-  }
+  },
+  button: {
+    backgroundColor: "#B09955",
+  },
 })

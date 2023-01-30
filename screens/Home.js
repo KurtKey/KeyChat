@@ -1,4 +1,4 @@
-import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Alert, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { ScrollView } from 'react-native'
 import { AntDesign, SimpleLineIcons } from "@expo/vector-icons"
@@ -16,7 +16,15 @@ const Home = ({ navigation }) => {
     });
   };
 
+const adminAddChat = () => {
+  if(auth?.currentUser?.email==="admin@gmail.com")
+  navigation.navigate("AddChat");
+  else
+  Alert.alert("Permission denied","Only Admin can create chats");
+}
+
   useEffect(() => {
+    console.log("rerendring from Home to reset chats")
     const unsubscribe = db
       .collection("chats")
       .onSnapshot((snapshot) =>
@@ -29,14 +37,15 @@ const Home = ({ navigation }) => {
     return unsubscribe;
   }, []);
 
+  // try to optimise photoURL!!!
   useLayoutEffect(() => {
     navigation.setOptions({
       title: "KeyChat",
-      headerStyle: { backgroundColor: "#fff" },
+      headerStyle: { backgroundColor: "#B09955" },
       headerTitleStyle: { color: "black" },
       headerTintColor: "black",
       headerLeft: () => (
-        <View style={{ marginLeft: 20 }}>
+        <View style={{ marginLeft: 20, marginRight: 10 }}>
           <TouchableOpacity activeOpacity={0.5}>
             <Avatar rounded source={{ uri: auth?.currentUser?.photoURL }} />
           </TouchableOpacity>
@@ -48,24 +57,23 @@ const Home = ({ navigation }) => {
             flexDirection: "row",
             justifyContent: "space-between",
             width: 80,
-            marginRight: 20,
+            marginRight: 15,
           }}
         >
-          <TouchableOpacity activeOpacity={0.5}>
-            <AntDesign name='camerao' size={24} color="black" />
-          </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate("AddChat")}
+            onPress={adminAddChat}
             activeOpacity={0.5}
           >
-            <SimpleLineIcons name='pencil' size={24} color="black" />
+            <SimpleLineIcons name='people' size={24} color="black" />
+          </TouchableOpacity>
+          <TouchableOpacity activeOpacity={0.5}>
+            <AntDesign name='logout' size={24} color="black" onPress={signOutUser} />
           </TouchableOpacity>
         </View>
       ),
 
     });
   }, [navigation]);
-
 
 
   const enterChat = (id, chatName) => {

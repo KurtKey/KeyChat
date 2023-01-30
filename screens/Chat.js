@@ -14,6 +14,7 @@ const Chat = ({ navigation, route }) => {
 
     const [input, setInput] = useState("");
     const [messages, setMessages] = useState([]);
+    const nameOfTheChat =route.params.chatName;
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Chat",
@@ -34,8 +35,7 @@ const Chat = ({ navigation, route }) => {
                     />
                     <Text style={{ color: "white", marginLeft: 10, fontWeight: "700" }}
                     >
-                        {console.log("repeted1")}
-                        {route.params.chatName}
+                        {nameOfTheChat}
                     </Text>
                 </View>
             ),
@@ -48,23 +48,24 @@ const Chat = ({ navigation, route }) => {
             //         <AntDesign name='arrowleft' size={24} color='white' />
             //       </TouchableOpacity>
             //   ),
-            headerRight: () => (
-                <View
-                    style={{
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                        width: 80,
-                        marginRight: 20,
-                    }}
-                >
-                    <TouchableOpacity>
-                        <FontAwesome name="video-camera" size={24} color="white" />
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Ionicons name="call" size={24} color="white" />
-                    </TouchableOpacity>
-                </View>
-            ),
+
+            // headerRight: () => (
+            //     <View
+            //         style={{
+            //             flexDirection: "row",
+            //             justifyContent: "space-between",
+            //             width: 80,
+            //             marginRight: 20,
+            //         }}
+            //     >
+            //         <TouchableOpacity>
+            //             <FontAwesome name="video-camera" size={24} color="white" />
+            //         </TouchableOpacity>
+            //         <TouchableOpacity>
+            //             <Ionicons name="call" size={24} color="white" />
+            //         </TouchableOpacity>
+            //     </View>
+            // ),
         });
     },[]);
 
@@ -81,13 +82,12 @@ const Chat = ({ navigation, route }) => {
                 email: auth.currentUser.email,
                 photoURL: auth.currentUser.photoURL,
             })
-
-
+            setInput("");
     };
 
 
     useEffect(() => {
-        console.log("repeted2");
+        console.log("rerending from Chat to set the messages")
         const unsubscribe = db
             .collection('chats')
             .doc(route.params.id)
@@ -169,7 +169,11 @@ const Chat = ({ navigation, route }) => {
                                 style={styles.textInput}
                             />
                             <TouchableOpacity onPress={sendMessage} activeOpacity={0.5}>
-                                <Ionicons name="send" size={24} color="#2B68E6" />
+                                <Ionicons 
+                                name="send" 
+                                size={24} 
+                                color="#B09955" 
+                                />
                             </TouchableOpacity>
                         </View>
                     </>
@@ -198,7 +202,7 @@ const styles = StyleSheet.create({
     },
     sender: {
         padding: 15,
-        backgroundColor: "#2c6bed",
+        backgroundColor: "#B09955",
         alignSelf: "flex-start",
         borderRadius: 20,
         marginRight: 15,

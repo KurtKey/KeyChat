@@ -32,7 +32,12 @@ navigation.setOptions({
   };
 
   return (
-    <KeyboardAvoidingView behavior='padding' enabled style={styles.container}>
+    <KeyboardAvoidingView 
+    behavior='padding' 
+    enabled 
+    style={styles.container}
+    >
+      
       <StatusBar style="light" />
       <Text h3 style={{ marginBottom: 50 }}>
         Create a KeyChat account
@@ -40,23 +45,27 @@ navigation.setOptions({
       <View style={styles.inputContainer}>
         <Input
           placeholder='Full Name'
+          cursorColor={"#B09955"}
           autoFocus
           type="text"
           value={name}
           onChangeText={text => setName(text)} />
         <Input
           placeholder='Email'
+          cursorColor={"#B09955"}
           type="email"
           value={email}
           onChangeText={text => setEmail(text)} />
         <Input
           placeholder='Password'
+          cursorColor={"#B09955"}
           type="password"
           secureTextEntry
           value={password}
           onChangeText={text => setPassword(text)} />
         <Input
           placeholder='Profile Picture URL (optional)'
+          cursorColor={"#B09955"}
           type="text"
           value={imageUrl}
           onChangeText={text => setImageUrl(text)}
@@ -64,7 +73,9 @@ navigation.setOptions({
         />
       </View>
       <Button
-        raised
+        containerStyle={styles.button}
+        type="outLine"
+        titleStyle={{ color: '#fff' }}
         onPress={register}
         title="Register"
       />
@@ -89,5 +100,6 @@ const styles = StyleSheet.create({
   button: {
     width: 200,
     marginTop: 10,
-  }
+    backgroundColor: "#B09955",
+  },
 })

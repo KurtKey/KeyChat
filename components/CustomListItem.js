@@ -7,6 +7,7 @@ const CustomListItem = ({ id, chatName, enterChat }) => {
   const [chatMessages, setChatMessages] = useState([]);
 
   useEffect(() => {
+    console.log('rerendring from CustomListItem to load messages and order them');
     const unsubscribe = db
     .collection('chats')
     .doc(id)
@@ -15,9 +16,8 @@ const CustomListItem = ({ id, chatName, enterChat }) => {
     .onSnapshot((snapshot) => 
     setChatMessages(snapshot.docs.map((doc) => doc.data()))
     );
-
 return unsubscribe;
-  });
+  },[]);
 
   return (
     <ListItem 

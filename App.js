@@ -12,7 +12,7 @@ import Chat from "./screens/Chat";
 const Stack = createNativeStackNavigator();
 const globalScreenOptions = {
 
-  headerStyle : {backgroundColor: '#2C6BED'},
+  headerStyle : {backgroundColor:  "#B09955"},
   headerTitleStyle : {color : 'white'},
   headerTintColor : 'white',
 
